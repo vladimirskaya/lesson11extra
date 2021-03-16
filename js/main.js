@@ -121,6 +121,24 @@ let	isNumber = function(n) {
 			periodSelect.addEventListener('input', findIncPerValue); // расчет поля incomePeriodValue.value на последующие разы (добавляется обрабочик)
 		},
 
+		placeholderValid: function(){
+			const placeholderName =[...document.querySelectorAll('[placeholder="Наименование"]')],
+				placeholderSum = [...document.querySelectorAll('[placeholder="Сумма"]')];
+
+			placeholderName.forEach(elem =>{
+				elem.addEventListener('input',()=> { 
+					elem.value = elem.value.replace(/[^а-я\ \,]/gi,'');
+				});
+			});
+			placeholderSum.forEach(elem =>{
+				elem.addEventListener('input',()=> {
+					elem.value = elem.value.replace(/[^0-9]/g,'');
+				});
+			});
+
+		},
+
+
 		//methdd: add extra input by pushing button 'plus' -- lesson11
 		addExpensesBlock: function(){
 				
@@ -242,6 +260,8 @@ let	isNumber = function(n) {
 		},
 
 }
+
+appData.placeholderValid();
 
 btnStart.addEventListener('click', appData.checkSalaryInput); 
 
